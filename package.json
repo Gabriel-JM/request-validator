@@ -1,0 +1,23 @@
+{
+  "name": "request-validator",
+  "version": "1.0.0",
+  "description": "A simple request validator in JS.",
+  "main": "RequestValidator.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-JM/request-validator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-JM/request-validator/issues"
+  },
+  "homepage": "https://github.com/Gabriel-JM/request-validator#readme",
+  "devDependencies": {
+    "jest": "^25.5.3"
+  }
+}
