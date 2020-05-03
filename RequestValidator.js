@@ -112,6 +112,8 @@ class RequestValidator {
   }
 
   valueBetween(valuesToCompare, value) {
+    if(!Array.isArray(valuesToCompare)) return false
+
     const [minimum, maximum] = valuesToCompare
     return value >= minimum && value <= maximum
   }
@@ -121,13 +123,17 @@ class RequestValidator {
   }
 
   timeFormat(pattern, value) {
+    if(typeof value !== 'string') return false
+
     const patterns = {
-      'hh:mm': /([0-1][0-9]|2[0-4]):[0-5][0-9]/g,
-      'hh:mm:ss': /([0-1][0-9]|2[0-4]):[0-5][0-9]:[0-5][0-9]/g,
+      'hh:mm a': /(0[1-9]|1[0-2]):[0-5]\d\s(AM|PM)/g,
+      'hh:mm:ss a': /(0[1-9]|1[0-2]):[0-5]\d:[0-5]\d\s(AM|PM)/g,
+      'hh:mm': /([0-1]\d|2[0-4]):[0-5]\d/g,
+      'hh:mm:ss': /([0-1]\d|2[0-4]):[0-5]\d:[0-5]\d/g,
     }
 
     const regex = patterns[pattern]
-    return RegExp(regex).test(value)
+    return pattern in patterns && RegExp(regex).test(value)
   }
 
 }
