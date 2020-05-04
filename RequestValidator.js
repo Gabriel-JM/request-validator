@@ -1,13 +1,12 @@
 class RequestValidator {
 
   constructor(model) {
+    this.model = model
     this.modelKeys = Object.keys(model)
   }
 
   validate(requestContent) {
-    this.requestKeys = Object.keys(requestContent)
-
-    const requestKeysValidationResult = this.validateRequiredKeys()
+    const requestKeysValidationResult = this.validateRequiredKeys(requestContent)
     
     if(!requestKeysValidationResult) {
       return {
@@ -53,9 +52,11 @@ class RequestValidator {
     return this.modelKeys.reduce((acc, key) => {
       return {...acc, [key]: Object.keys(this.model[key])}
     }, {})
-  }
+  } 
 
-  validateRequiredKeys() {
+  validateRequiredKeys(requestContent) {
+    this.requestKeys = Object.keys(requestContent)
+
     const requiredKeys = this.modelKeys.filter(key => {
       const optional = this.model[key].optional || false
       return optional == false
@@ -85,12 +86,6 @@ class RequestValidator {
     return methodName in methods ? methods[methodName](value) : 0
   }
 
-  type(expected, value) {
-    return Array.isArray(value) ?
-      expected === 'array' :
-      expected === typeof value
-  }
-
   maxLength(limit, value) {
     return this.getLength(value) <= limit
   }
@@ -101,6 +96,12 @@ class RequestValidator {
 
   length(expected, value) {
     return this.getLength(value) === expected
+  }
+
+  type(expected, value) {
+    return Array.isArray(value) ?
+      expected === 'array' :
+      expected === typeof value
   }
 
   maxValue(limit, value) {

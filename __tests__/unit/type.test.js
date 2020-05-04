@@ -1,8 +1,7 @@
 const RequestValidator = require('../../RequestValidator')
 
-let requestValidator =  null
-
 describe('Type Method', () => {
+  let requestValidator =  null
 
   beforeAll(() => {
     requestValidator = new RequestValidator({})
@@ -21,62 +20,53 @@ describe('Type Method', () => {
   )
 
   it(
-    'should return true, when model\'s type is array and request value too',
+    `should return true when model\'s type is one of:
+    array, object, string, number, boolean and request value too`,
     () => {
-      const model = { type: 'array' }
-      const fakeRequest = { value: [] }
+      const modelOfArray = { type: 'array' }
+      const arrayValue = []
 
-      const result = requestValidator.type(model.type, fakeRequest.value)
+      const typeArrayResult = requestValidator.type(
+        modelOfArray.type, arrayValue
+      )
 
-      expect(result).toBeTruthy()
-    }
-  )
+      expect(typeArrayResult).toBeTruthy()
 
-  it(
-    'should return true, when model\'s type is object and request value too',
-    () => {
-      const model = { type: 'object' }
-      const fakeRequest = { value: {} }
+      const modelOfObject = { type: 'object' }
+      const objectValue = {}
 
-      const result = requestValidator.type(model.type, fakeRequest.value)
+      const typeObjectResult = requestValidator.type(
+        modelOfObject.type, objectValue
+      )
 
-      expect(result).toBeTruthy()
-    }
-  )
+      expect(typeObjectResult).toBeTruthy()
 
-  it(
-    'should return true, when model\'s type is number and request value too',
-    () => {
-      const model = { type: 'number' }
-      const fakeRequest = { value: 100 }
+      const modelOfString = { type: 'string' }
+      const stringValue = 'hi'
 
-      const result = requestValidator.type(model.type, fakeRequest.value)
+      const typeStringResult = requestValidator.type(
+        modelOfString.type, stringValue
+      )
 
-      expect(result).toBeTruthy()
-    }
-  )
+      expect(typeStringResult).toBeTruthy()
 
-  it(
-    'should return true, when model\'s type is string and request value too',
-    () => {
-      const model = { type: 'string' }
-      const fakeRequest = { value: 'hi' }
+      const modelOfNumber = { type: 'number' }
+      const numberValue = 10
 
-      const result = requestValidator.type(model.type, fakeRequest.value)
+      const typeNumberResult = requestValidator.type(
+        modelOfNumber.type, numberValue
+      )
 
-      expect(result).toBeTruthy()
-    }
-  )
+      expect(typeNumberResult).toBeTruthy()
 
-  it(
-    'should return true, when model\'s type is boolean and request value too',
-    () => {
-      const model = { type: 'boolean' }
-      const fakeRequest = { value: true }
+      const modelOfBoolean = { type: 'boolean' }
+      const booleanValue = true
 
-      const result = requestValidator.type(model.type, fakeRequest.value)
+      const typeBooleanResult = requestValidator.type(
+        modelOfBoolean.type, booleanValue
+      )
 
-      expect(result).toBeTruthy()
+      expect(typeBooleanResult).toBeTruthy()
     }
   )
 

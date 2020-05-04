@@ -1,9 +1,8 @@
 const RequestValidator = require('../../RequestValidator')
 
-const model = {}
-let requestValidator = null
-
 describe('Get Length Method', () => {
+  const model = {}
+  let requestValidator = null
 
   beforeAll(() => {
     requestValidator = new RequestValidator(model)

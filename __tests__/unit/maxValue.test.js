@@ -1,9 +1,8 @@
 const RequestValidator = require('../../RequestValidator')
 
-const model = { maxValue: 5 }
-let requestValidator = null
-
 describe('Max Value Method', () => {
+  const model = { maxValue: 5 }
+  let requestValidator = null
   
   beforeAll(() => {
     requestValidator = new RequestValidator(model)

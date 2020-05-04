@@ -1,9 +1,8 @@
 const RequestValidator = require('../../RequestValidator')
 
-const model = { minValue: 5 }
-let requestValidator = null
-
 describe('Min Value Method', () => {
+  const model = { minValue: 5 }
+  let requestValidator = null  
   
   beforeAll(() => {
     requestValidator = new RequestValidator(model)

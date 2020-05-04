@@ -1,9 +1,8 @@
 const RequestValidator = require('../../RequestValidator')
 
-const model = { valueBetween: [10, 20] }
-let requestValidator = null
-
 describe('Value in Between Method', () => {
+  const model = { valueBetween: [10, 20] }
+  let requestValidator = null
 
   beforeAll(() => {
     requestValidator = new RequestValidator(model)

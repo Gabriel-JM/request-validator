@@ -1,9 +1,8 @@
 const RequestValidator = require('../../RequestValidator')
 
-const model = { equalTo: 5 }
-let requestValidator = null
-
 describe('Equal To Method', () => {
+  const model = { equalTo: 5 }
+  let requestValidator = null
 
   beforeAll(() => {
     requestValidator = new RequestValidator(model)
