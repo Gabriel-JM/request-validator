@@ -29,21 +29,30 @@ class RequestValidator {
       valid: true
     }
 
-    Object.keys(validationObj).forEach(key => {
+    for(const key in validationObj) {
       const requestValue = requestContent[key]
       const modelKey = this.model[key]
-      validationObj[key].forEach(toValidate => {
-        if(toValidate in this) {
-          const result = this[toValidate](modelKey[toValidate], requestValue)
-          if(!result) {
+      const toValidateField = validationObj[key]
+
+      toValidateField.forEach(methodName => {
+        const modelKeyValidation = modelKey[methodName]
+        if(methodName in this) {
+          const result = this[methodName](modelKeyValidation, requestValue)
+          const isntRequestValid = (
+            !result && (!modelKey.optional || 
+            modelKey.optional && requestValue)
+          )
+          
+          if(isntRequestValid) {
             validationResult = {
-              message: `Request didn't pass on ${toValidate} validation.`,
+              message: `Request didn't pass on ${key} field ${methodName} validation.`,
               valid: result
             }
           }
         }
       })
-    })
+      
+    }
 
     return validationResult
   }
@@ -52,7 +61,7 @@ class RequestValidator {
     return this.modelKeys.reduce((acc, key) => {
       return {...acc, [key]: Object.keys(this.model[key])}
     }, {})
-  } 
+  }
 
   validateRequiredKeys(requestContent) {
     this.requestKeys = Object.keys(requestContent)
