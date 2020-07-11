@@ -1,12 +1,12 @@
 # Request Validator
-A simple request validator in JS.
+A simple request validator in TypeScript.
 
 ## How to use?
 It's very simple, you just need an `object` that represents the `model` to be compared, than instantiate the `RequestValidator` Object and pass the model as parameter, and finally pass the `request object` to the validate method of the RequestValidator.
 
 #### Model example
 
-```js
+```ts
   const model = {
     id: {
       type: 'number'
@@ -24,21 +24,21 @@ It's very simple, you just need an `object` that represents the `model` to be co
 ```
 #### Request Validator implementation example
 
-```js
+```ts
   const requestValidator = new RequestValidator(model)
   const validationResult = requestValidator.validate(IncomingRequest)
 ```
 
  **The constant `validationResult` has the following results:**
  - When request pass on validation:
-  ```js
+  ```ts
     {
       message: 'Ok',
       valid: true
     }
   ```
  - When request didn't pass on validation:
-  ```js
+  ```ts
     {
       message: 'Request didn\'t pass on {field name} field {validation name} validation.',
       valid: false
