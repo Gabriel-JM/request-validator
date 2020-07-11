@@ -2,18 +2,14 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Max Value Method', () => {
   const model = { maxValue: 5 }
-  let requestValidator = null
-  
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'It should return false when request value is greater than on model', () => {
       const fakeRequest = { value: 6 }
       const result = requestValidator.maxValue(model.maxValue, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -22,7 +18,7 @@ describe('Max Value Method', () => {
       const fakeRequest = { value: 4 }
       const result = requestValidator.maxValue(model.maxValue, fakeRequest.value)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
@@ -31,7 +27,7 @@ describe('Max Value Method', () => {
       const fakeRequest = { value: 5 }
       const result = requestValidator.maxValue(model.maxValue, fakeRequest.value)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 

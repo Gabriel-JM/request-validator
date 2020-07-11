@@ -17,7 +17,7 @@ describe('Validate Required Keys Method', () => {
 
       const result = requestValidator.validateRequiredKeys(fakeRequest)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
@@ -37,7 +37,7 @@ describe('Validate Required Keys Method', () => {
 
       const result = requestValidator.validateRequiredKeys(fakeRequest)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 })

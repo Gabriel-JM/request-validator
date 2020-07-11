@@ -1,11 +1,7 @@
 import RequestValidator from '../../RequestValidator'
 
 describe('Type Method', () => {
-  let requestValidator =  null
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator({})
-  })
+  const requestValidator = new RequestValidator({})
 
   it(
     'should return false when the type of request value is different than on model',
@@ -15,7 +11,7 @@ describe('Type Method', () => {
 
       const result = requestValidator.type(model.type, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -30,7 +26,7 @@ describe('Type Method', () => {
         modelOfArray.type, arrayValue
       )
 
-      expect(typeArrayResult).toBeTruthy()
+      expect(typeArrayResult).toBe(true)
 
       const modelOfObject = { type: 'object' }
       const objectValue = {}
@@ -39,7 +35,7 @@ describe('Type Method', () => {
         modelOfObject.type, objectValue
       )
 
-      expect(typeObjectResult).toBeTruthy()
+      expect(typeObjectResult).toBe(true)
 
       const modelOfString = { type: 'string' }
       const stringValue = 'hi'
@@ -48,7 +44,7 @@ describe('Type Method', () => {
         modelOfString.type, stringValue
       )
 
-      expect(typeStringResult).toBeTruthy()
+      expect(typeStringResult).toBe(true)
 
       const modelOfNumber = { type: 'number' }
       const numberValue = 10
@@ -57,7 +53,7 @@ describe('Type Method', () => {
         modelOfNumber.type, numberValue
       )
 
-      expect(typeNumberResult).toBeTruthy()
+      expect(typeNumberResult).toBe(true)
 
       const modelOfBoolean = { type: 'boolean' }
       const booleanValue = true
@@ -66,7 +62,7 @@ describe('Type Method', () => {
         modelOfBoolean.type, booleanValue
       )
 
-      expect(typeBooleanResult).toBeTruthy()
+      expect(typeBooleanResult).toBe(true)
     }
   )
 

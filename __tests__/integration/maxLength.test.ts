@@ -2,11 +2,7 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Max Length Method', () => {
   const model = { maxLength: 2 }
-  let requestValidator
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'should return false when the request value\'s length is greater than on model',
@@ -14,7 +10,7 @@ describe('Max Length Method', () => {
       const fakeRequest = { value: 100 }
       const result = requestValidator.maxLength(model.maxLength, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -29,8 +25,8 @@ describe('Max Length Method', () => {
         model.maxLength, fakeRequest.lesserValue
       )
 
-      expect(equalValueResult).toBeTruthy()
-      expect(lesserValueRequest).toBeTruthy()
+      expect(equalValueResult).toBe(true)
+      expect(lesserValueRequest).toBe(true)
     }
   )
 })

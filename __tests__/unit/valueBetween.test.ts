@@ -2,11 +2,7 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Value in Between Method', () => {
   const model = { valueBetween: [10, 20] }
-  let requestValidator = null
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'should return true when request value is in between model definition',
@@ -32,16 +28,6 @@ describe('Value in Between Method', () => {
 
       expect(greaterResult).toBeFalsy()
       expect(lesserResult).toBeFalsy()
-    }
-  )
-
-  it(
-    'should return false when the valueBetween property on model isn\'t an array',
-    () => {
-      const customModel = { valueBetween: 10 }
-      const result = requestValidator.valueBetween(customModel.valueBetween, 0)
-
-      expect(result).toBeFalsy()
     }
   )
 

@@ -2,11 +2,7 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Min Length Method', () => {
   const model = { minLength: 3 }
-  let requestValidator
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'should return false when request value\'s length is lesser than on model',
@@ -14,7 +10,7 @@ describe('Min Length Method', () => {
       const fakeRequest = { value: { a: 1, b: 2 } }
       const result = requestValidator.minLength(model.minLength, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -29,8 +25,8 @@ describe('Min Length Method', () => {
         model.minLength, fakeRequest.greaterValue
       )
 
-      expect(equalValueResult).toBeTruthy()
-      expect(greaterValueResult).toBeTruthy()
+      expect(equalValueResult).toBe(true)
+      expect(greaterValueResult).toBe(true)
     }
   )
 })

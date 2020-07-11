@@ -1,12 +1,7 @@
 import RequestValidator from '../../RequestValidator'
 
 describe('Get Length Method', () => {
-  const model = {}
-  let requestValidator = null
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator({})
 
   it(
     'It should get the length number of variables of type string', () => {

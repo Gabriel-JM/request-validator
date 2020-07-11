@@ -2,18 +2,14 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Min Value Method', () => {
   const model = { minValue: 5 }
-  let requestValidator = null  
-  
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'It should return false when request value is less than on model', () => {
       const fakeRequest = { value: 4 }
       const result = requestValidator.minValue(model.minValue, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -22,7 +18,7 @@ describe('Min Value Method', () => {
       const fakeRequest = { value: 6 }
       const result = requestValidator.minValue(model.minValue, fakeRequest.value)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
@@ -31,7 +27,7 @@ describe('Min Value Method', () => {
       const fakeRequest = { value: 5 }
       const result = requestValidator.minValue(model.minValue, fakeRequest.value)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 

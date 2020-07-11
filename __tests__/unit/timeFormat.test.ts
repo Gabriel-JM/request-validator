@@ -1,30 +1,14 @@
 import RequestValidator from '../../RequestValidator'
 
 describe('Time Format Method', () => {
-  let requestValidator = null
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator({})
-  })
+  const requestValidator = new RequestValidator({})
 
   it(
     'should return false when model pattern isn\'t valid', () => {
       const model = { timeFormat: 'h:m' }
       const result = requestValidator.timeFormat(model.timeFormat, '10')
 
-      expect(result).toBeFalsy()
-    }
-  )
-
-  it(
-    'should return false when request value isn\'t a string', () => {
-      const model = { timeFormat: 'hh:mm' }
-      const fakeRequest = { value: 18 }
-      const result = requestValidator.timeFormat(
-        model.timeFormat, fakeRequest.value
-      )
-
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -36,7 +20,7 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value
       )
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
@@ -49,7 +33,7 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value
       )
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -65,8 +49,8 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value2
       )
 
-      expect(result1).toBeTruthy()
-      expect(result2).toBeTruthy()
+      expect(result1).toBe(true)
+      expect(result2).toBe(true)
     }
   )
 
@@ -82,8 +66,8 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value2
       )
 
-      expect(result1).toBeFalsy()
-      expect(result2).toBeFalsy()
+      expect(result1).toBe(false)
+      expect(result2).toBe(false)
     }
   )
 
@@ -95,7 +79,7 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value
       )
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
@@ -107,7 +91,7 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value
       )
       
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -123,8 +107,8 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value2
       )
 
-      expect(result1).toBeTruthy()
-      expect(result2).toBeTruthy()
+      expect(result1).toBe(true)
+      expect(result2).toBe(true)
     }
   )
 
@@ -140,8 +124,8 @@ describe('Time Format Method', () => {
         model.timeFormat, fakeRequest.value2
       )
 
-      expect(result1).toBeFalsy()
-      expect(result2).toBeFalsy()
+      expect(result1).toBe(false)
+      expect(result2).toBe(false)
     }
   )
 

@@ -1,8 +1,8 @@
-type stringKeyAccess = {
+interface stringKeyAccess {
   [key: string]: any
 }
 
-class RequestValidator {
+class RequestValidator implements stringKeyAccess {
 
   [key: string]: any
   modelKeys: string[]
@@ -128,8 +128,6 @@ class RequestValidator {
   }
 
   valueBetween(valuesToCompare: number[], value: number) {
-    if(!Array.isArray(valuesToCompare)) return false
-
     const [minimum, maximum] = valuesToCompare
     return value >= minimum && value <= maximum
   }

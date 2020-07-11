@@ -2,11 +2,7 @@ import RequestValidator from '../../RequestValidator'
 
 describe('Length Method', () => {
   const model = { length: 5 }
-  let requestValidator
-
-  beforeAll(() => {
-    requestValidator = new RequestValidator(model)
-  })
+  const requestValidator = new RequestValidator(model)
 
   it(
     'should return false when the request value\'s length is different than on model',
@@ -14,7 +10,7 @@ describe('Length Method', () => {
       const fakeRequest = { value: 'Hi' }
       const result = requestValidator.length(model.length, fakeRequest.value)
 
-      expect(result).toBeFalsy()
+      expect(result).toBe(false)
     }
   )
 
@@ -24,7 +20,7 @@ describe('Length Method', () => {
       const fakeRequest = { value: 'Hello' }
       const result = requestValidator.length(model.length, fakeRequest.value)
 
-      expect(result).toBeTruthy()
+      expect(result).toBe(true)
     }
   )
 
