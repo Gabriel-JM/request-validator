@@ -1,4 +1,4 @@
-const RequestValidator = require('../../RequestValidator')
+import RequestValidator from '../../RequestValidator'
 
 describe('Validate Required Keys Method', () => {
   it(

@@ -1,4 +1,4 @@
-const RequestValidator = require('../../RequestValidator')
+import RequestValidator from '../../RequestValidator'
 
 describe('Max Value Method', () => {
   const model = { maxValue: 5 }

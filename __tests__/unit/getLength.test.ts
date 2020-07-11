@@ -1,4 +1,4 @@
-const RequestValidator = require('../../RequestValidator')
+import RequestValidator from '../../RequestValidator'
 
 describe('Get Length Method', () => {
   const model = {}

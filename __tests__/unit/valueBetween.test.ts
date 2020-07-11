@@ -1,4 +1,4 @@
-const RequestValidator = require('../../RequestValidator')
+import RequestValidator from '../../RequestValidator'
 
 describe('Value in Between Method', () => {
   const model = { valueBetween: [10, 20] }

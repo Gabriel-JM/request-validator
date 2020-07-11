@@ -1,4 +1,4 @@
-const RequestValidator = require('../../RequestValidator')
+import RequestValidator from '../../RequestValidator'
 
 describe('Validate Method', () => {
   describe('should return a message of invalid request when', () => {

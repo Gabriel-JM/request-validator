@@ -1,11 +1,17 @@
+type stringKeyAccess = {
+  [key: string]: any
+}
+
 class RequestValidator {
 
-  constructor(model) {
-    this.model = model
+  [key: string]: any
+  modelKeys: string[]
+
+  constructor(private model: stringKeyAccess) {
     this.modelKeys = Object.keys(model)
   }
 
-  validate(requestContent) {
+  validate(requestContent: stringKeyAccess) {
     const requestKeysValidationResult = this.validateRequiredKeys(requestContent)
     
     if(!requestKeysValidationResult) {
@@ -34,7 +40,7 @@ class RequestValidator {
       const modelKey = this.model[key]
       const toValidateField = validationObj[key]
 
-      toValidateField.forEach(methodName => {
+      toValidateField.forEach((methodName: string) => {
         const modelKeyValidation = modelKey[methodName]
         if(methodName in this) {
           const result = this[methodName](modelKeyValidation, requestValue)
@@ -60,12 +66,12 @@ class RequestValidator {
   createValidationObject() {
     return this.modelKeys.reduce((acc, key) => {
       return {...acc, [key]: Object.keys(this.model[key])}
-    }, {})
+    }, {} as stringKeyAccess)
   }
 
-  validateRequiredKeys(requestContent) {
+  validateRequiredKeys(requestContent: stringKeyAccess) {
     this.requestKeys = Object.keys(requestContent)
-
+    
     const requiredKeys = this.modelKeys.filter(key => {
       const optional = this.model[key].optional || false
       return optional == false
@@ -78,15 +84,15 @@ class RequestValidator {
     return requiredKeysValidation
   }
 
-  getLength(value) {
-    const methods = {
-      number(value) {
+  getLength(value: number|string|[]|{}) {
+    const methods: stringKeyAccess = {
+      number(value: number) {
         return value.toString().length
       },
-      string(value) {
+      string(value: string) {
         return value.length
       },
-      object(value) {
+      object(value: object | []) {
         return Object.keys(value).length
       }
     }
@@ -95,47 +101,47 @@ class RequestValidator {
     return methodName in methods ? methods[methodName](value) : 0
   }
 
-  maxLength(limit, value) {
-    return this.getLength(value) <= limit
-  }
-
-  minLength(minimum, value) {
-    return this.getLength(value) >= minimum
-  }
-
-  length(expected, value) {
-    return this.getLength(value) === expected
-  }
-
-  type(expected, value) {
+  type(expected: string, value: any) {
     return Array.isArray(value) ?
       expected === 'array' :
       expected === typeof value
   }
 
-  maxValue(limit, value) {
+  maxLength(limit: number, value: number|string|[]|{}) {
+    return this.getLength(value) <= limit
+  }
+
+  minLength(minimum: number, value: number|string|[]|{}) {
+    return this.getLength(value) >= minimum
+  }
+
+  length(expected: number, value: number|string|[]|{}) {
+    return this.getLength(value) === expected
+  }
+
+  maxValue(limit: number, value: number) {
     return value <= limit
   }
 
-  minValue(minimum, value) {
+  minValue(minimum: number, value: number) {
     return value >= minimum
   }
 
-  valueBetween(valuesToCompare, value) {
+  valueBetween(valuesToCompare: number[], value: number) {
     if(!Array.isArray(valuesToCompare)) return false
 
     const [minimum, maximum] = valuesToCompare
     return value >= minimum && value <= maximum
   }
 
-  equalTo(expected, value) {
+  equalTo(expected: number|string|boolean, value: number|string|boolean) {
     return expected === value
   }
 
-  timeFormat(pattern, value) {
+  timeFormat(pattern: string, value: string) {
     if(typeof value !== 'string') return false
 
-    const patterns = {
+    const patterns: stringKeyAccess = {
       'hh:mm a': /(0[1-9]|1[0-2]):[0-5]\d\s(AM|PM)/g,
       'hh:mm:ss a': /(0[1-9]|1[0-2]):[0-5]\d:[0-5]\d\s(AM|PM)/g,
       'hh:mm': /([0-1]\d|2[0-4]):[0-5]\d/g,
@@ -148,4 +154,4 @@ class RequestValidator {
 
 }
 
-module.exports = RequestValidator
+export default RequestValidator
