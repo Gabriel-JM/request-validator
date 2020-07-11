@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/Gabriel-JM/request-validator#readme",
   "devDependencies": {
-    "jest": "^25.5.3"
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.22",
+    "jest": "^25.5.3",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
   }
 }
